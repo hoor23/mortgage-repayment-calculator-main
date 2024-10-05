@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
+<link rel="stylesheet" href="style.css">
+
+  <title>Frontend Mentor | Mortgage repayment calculator</title>
+
+</head>
+
+<body>
+
+  <div class="container">
+    <main>
+      <div class="calculator-display">
+        <div class="title">
+          <h2>Mortgage Calculator</h2>
+          <span class="clearBtn"> Clear All</span>
+        </div>
+        <form class="cntForm" id="contact-form" action="index.html" method="post" enctype="multipart/form-data">
+
+          <div class="row">
+            <div class="fldset">
+              <label for="mortage">Mortgage Amount</label>
+              <div class="mortage-amount">
+                <span>&pound;</span>
+                <input id="mortage" name="mortage" type="text" required="">
+              </div>
+              <!-- <span class="errorMsg">This field is required</span> -->
+            </div>
+          </div>
+          <div class="row">
+            <div class="fldset">
+              <label for="mortageTerm">Mortgage Term</label>
+              <div class="mortage-Term">
+                <input id="mortageTerm" name="mortageTerm" minlength="2" type="text" required="">
+                <span>years</span>
+              </div>
+            </div>
+            <div class="fldset">
+              <label for="InterestAmount">Interest Rate</label>
+              <div class="Interest-amount">
+                <input id="InterestAmount" name="InterestAmount" minlength="2" type="text" required="">
+                <span>&#37;</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="fldset radio">
+              <p> Mortgage Type</p>
+              <div class="mortage-Type">
+                <label for="Repayment" class="custom-radio">
+                <input id="Repayment" name="mortage-Type" type="radio" required="">
+                Repayment
+              </label>
+              </div>
+              <div class="mortage-Type">
+                <label for="Interest" class="custom-radio">
+                <input id="Interest" name="mortage-Type" type="radio" required="">
+                 Interest Only
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="fldset">
+              <button type="submit" class="calc-btn" onclick="validate()"><img src="./assets/images/icon-calculator.svg"
+                  alt="icon-calculator">Calculate Repayments </button>
+
+            </div>
+          </div>
+
+        </form>
+      </div>
+      <div class="result-display">
+        <div class="resultScreen1">
+          <picture>
+            <img src="./assets/images/illustration-empty.svg" alt="illustration-empty">
+          </picture>
+          <div class="result-title1">
+            <h2>Results shown here</h2>
+            <p> Complete the form and click “calculate repayments” to see what
+              your monthly repayments would be.</p>
+          </div>
+        </div>
+        <div class="resultScreen2">
+          <div class="result-title1">
+            <h2>Your results</h2>
+            <p> Your results are shown below based on the information you provided.
+              To adjust the results, edit the form and click “calculate repayments” again.</p>
+          </div>
+          <div class="output-result">
+            <p>Your monthly repayments</p>
+            <h1 class="monthly-repayments">&pound;</h1>
+            <p style="padding-top: 1.5rem;"> Total you'll repay over the term</p>
+            <h2 class="Total-repay">&pound;</h2>
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer>
+      <div class="attribution">
+        Challenge by <a href="https://www.frontendmentor.io?ref=challenge">Frontend Mentor</a>.
+        Coded by <a href="#">Your Name Here</a>.
+      </div>
+    </footer>
+  </div>
+  <script src="main.js"></script>
+</body>
+
+</html>

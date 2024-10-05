@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
+
+    *,
+    *::after,
+    *::before {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Plus Jakarta Sans", sans-serif;
+      background-color: hsl(202, 86%, 94%);
+    }
+
+    main {
+      display: flex;
+      flex-direction: column;
+      background-color: white;
+      justify-content: flex-start;
+      align-items: center;
+      height: 648px;
+    }
+
+    .container {
+      margin: auto;
+      width: 100%;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .calculator-display {
+      background-color: hsl(0, 0%, 100%);
+      padding: 2rem;
+    }
+
+    .title {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      color: hsl(202, 55%, 16%);
+      font-size: 15px;
+    }
+
+    .clearBtn {
+      text-decoration: underline;
+      color: hsl(200, 24%, 40%);
+      cursor: pointer;
+    }
+
+    /* form */
+    .cntForm {
+      padding: 2.5rem 0rem 0rem 0rem;
+    }
+
+    .fldset {
+      display: inline-block;
+      width: 100%;
+      text-align: left;
+    }
+
+    .row {
+      display: flex;
+      padding-bottom: 1rem;
+      gap: 1rem;
+    }
+
+    .fldset textarea {
+      width: 100%;
+      height: 130px;
+      border-radius: 6px;
+      border: 0px;
+      padding: 12px 12px;
+      color: #333;
+      border: solid 1px #ccc;
+      font-size: 14px;
+    }
+
+    .fldset input {
+      height: 39px;
+      width: 100%;
+      border: none;
+      outline: none;
+      border-radius: 0px 4px 4px 0px;
+      font-size: 16px;
+      padding: 0.9rem;
+      cursor: pointer;
+    }
+
+    #mortage:-webkit-autofill,
+    #mortage:-webkit-autofill:hover,
+    #mortage:-webkit-autofill:focus,
+    #mortage:-webkit-autofill:active,
+    #mortageTerm:-webkit-autofill,
+    #mortageTerm:-webkit-autofill:hover,
+    #mortageTerm:-webkit-autofill:focus,
+    #mortageTerm:-webkit-autofill:active,
+    #InterestAmount:-webkit-autofill,
+    #InterestAmount:-webkit-autofill:hover,
+    #InterestAmount:-webkit-autofill:focus,
+    #InterestAmount:-webkit-autofill:active {
+      transition: background-color 999999s ease-in-out 0s;
+    }
+
+
+    #Interest,
+    #Repayment {
+      width: auto;
+      margin-right: 0.5rem;
+      background-color: hsl(61, 70%, 52%);
+    }
+
+    .fldset input:active,
+    .fldset input:focus {
+      border: none;
+      outline: none;
+    }
+
+    .row .fldset .mortage-amount:focus-within,
+    .fldset .mortage-Term:focus-within,
+    .fldset .Interest-amount:focus-within {
+      border: 2px solid hsl(61, 70%, 52%);
+    }
+    .fldset .mortage-Type:focus-within{
+      border: 1px solid hsl(61deg 88.9% 57.45%);
+      background: hsl(61deg 88.9% 57.45% / 8%);
+    }
+    .fldset .mortage-amount:hover,
+    .mortage-Term:hover,
+    .Interest-amount:hover {
+      border: 1px solid hsl(202, 55%, 16%);
+      cursor: pointer;
+
+    }
+
+    .row .fldset .mortage-amount:focus-within span,
+    .fldset .mortage-Term:focus-within span,
+    .fldset .Interest-amount:focus-within span {
+      background-color: hsl(61, 70%, 52%);
+      color: hsl(202, 55%, 16%);
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .fldset label,
+    p {
+      color: hsl(200, 24%, 40%);
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .mortage-amount,
+    .mortage-Term,
+    .Interest-amount {
+      margin-top: 0.5rem;
+      margin-bottom: 0.3rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 42px;
+      border: 1px solid hsl(200, 26%, 54%);
+      border-radius: 4px;
+    }
+
+    .mortage-Type {
+      justify-self: flex-start;
+      margin-top: 0.5rem;
+      display: flex;
+      align-items: center;
+      height: 42px;
+      border: 1px solid hsl(200, 26%, 54%);
+      border-radius: 4px;
+      padding: 1rem;
+    }
+
+    .mortage-amount span,
+    .mortage-Term span,
+    .Interest-amount span {
+      height: 39px;
+      background-color: hsl(202, 86%, 94%);
+      padding: 0.5rem 1rem;
+      border-radius: 1px 0px 0px 1px;
+      color: hsl(200, 24%, 40%);
+      font-weight: 600;
+
+    }
+
+    .mortage-Type label {
+      color: hsl(202, 55%, 16%);
+    }
+
+    .mortage-Term span,
+    .Interest-amount span {
+      border-radius: 0px 1px 1px 0px;
+    }
+
+    .calc-btn {
+      padding: 0.5rem 1.7rem;
+      height: 46px;
+      display: flex;
+      width: 100%;
+      align-items: center;
+      flex-direction: row;
+      gap: 0.5rem;
+      border-radius: 109px;
+      border: none;
+      background: hsl(61, 70%, 52%);
+      font-size: 15px;
+      color: hsl(202, 55%, 16%);
+      font-weight: 600;
+      margin-top: 1rem;
+      justify-content: center;
+    }
+
+    .calc-btn:hover {
+      background: hsl(61deg 100% 80.13%);
+      cursor: pointer;
+    }
+
+    .calc-btn img {
+      width: 21px;
+    }
+
+    .mortage-Type:hover {
+      border: 1px solid hsl(61deg 88.9% 57.45%);
+      outline: black;
+      cursor: pointer;
+    }
+
+    .errorMsg {
+      font-size: 13px;
+      color: hsl(4, 69%, 50%);
+      font-weight: 700;
+      display: block;
+    }
+
+    /* .errorMsg_display{
+      display: block;
+    } */
+    .errorBorder {
+      border: 2px solid hsl(4, 69%, 50%) !important;
+    }
+
+    .errorSpan {
+      background-color: hsl(4, 69%, 50%) !important;
+      color: hsl(0, 0%, 100%) !important;
+    }
+
+    /* ------------ */
+    .result-display {
+      background-color: hsl(202, 55%, 16%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+
+    .resultScreen1 {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+    }
+
+    .resultScreen2 {
+      display: none;
+    }
+
+    .screenDisplay {
+      display: flex;
+      flex-direction: column;
+
+    }
+
+    .resultScreen2 .result-title1 {
+      text-align: left;
+    }
+
+    .result-display picture img {
+      width: 160px;
+    }
+
+    .result-title1 {
+      color: hsl(202, 86%, 94%);
+      font-size: 15px;
+      text-align: center;
+    }
+
+    .result-title1 p {
+      padding: 1rem 1rem 1.6rem 1rem;
+      font-size: 15px;
+    }
+
+    .Total-repay {
+      color: hsl(202, 86%, 94%);
+      padding-top: 0.5rem;
+    }
+
+    .result-title1 h2 {
+      padding: 0rem 1rem;
+    }
+
+    .output-result {
+      padding: 1.5rem 1.5rem 2.5rem 1.5rem;
+      border-top: 3px solid hsl(61, 70%, 52%);
+      border-radius: 9px;
+      margin: 0rem 1rem;
+      background: hsl(202.94deg 56.67% 11.76%);
+    }
+
+    .monthly-repayments {
+      color: hsl(61, 70%, 52%);
+      padding-top: 1rem;
+      padding-bottom: 1.9rem;
+      font-size: 40px;
+      border-bottom: 1px solid hsl(202deg 86% 94% / 38%);
+      ;
+    }
+
+    .attribution {
+      font-size: 11px;
+      text-align: center;
+    }
+
+    .attribution a {
+      color: hsl(228, 45%, 44%);
+    }
+
+    @media screen and (min-width:768px) {
+      main {
+        flex-direction: row;
+        height: auto;
+      }
+      .calculator-display {
+        width: 395px;
+      }
+      .calc-btn {
+    width: 262px;
+  }
+  .result-display {
+    width: 390px;
+    border-radius: 0px 18px 18px 53px;
+    height: 528px;
+  }
+    }
+    @media screen and (min-width:1024px) {
+      .calculator-display {
+        width: 430px;
+      }
+  .result-display {
+    width: 430px;
+  }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+    <main>
+      <div class="calculator-display">
+        <div class="title">
+          <h2>Mortgage Calculator</h2>
+          <span class="clearBtn"> Clear All</span>
+        </div>
+        <form class="cntForm" id="contact-form" action="index.html" method="post" enctype="multipart/form-data">
+
+          <div class="row">
+            <div class="fldset">
+              <label for="mortage">Mortgage Amount</label>
+              <div class="mortage-amount">
+                <span>&pound;</span>
+                <input id="mortage" name="mortage" type="text" required="">
+              </div>
+              <!-- <span class="errorMsg">This field is required</span> -->
+            </div>
+          </div>
+          <div class="row">
+            <div class="fldset">
+              <label for="mortageTerm">Mortgage Term</label>
+              <div class="mortage-Term">
+                <input id="mortageTerm" name="mortageTerm" minlength="2" type="text" required="">
+                <span>years</span>
+              </div>
+            </div>
+            <div class="fldset">
+              <label for="InterestAmount">Interest Rate</label>
+              <div class="Interest-amount">
+                <input id="InterestAmount" name="InterestAmount" minlength="2" type="text" required="">
+                <span>&#37;</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="fldset radio">
+              <p> Mortgage Type</p>
+              <div class="mortage-Type">
+
+                <input id="Repayment" name="mortage-Type" type="radio" required="">
+                <label for="Repayment">Repayment</label>
+              </div>
+              <div class="mortage-Type">
+                <input id="Interest" name="mortage-Type" type="radio" required="">
+                <label for="Interest"> Interest Only</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="fldset">
+              <button type="submit" class="calc-btn" onclick="validate()"><img src="./assets/images/icon-calculator.svg"
+                  alt="icon-calculator">Calculate Repayments </button>
+
+            </div>
+          </div>
+
+        </form>
+      </div>
+      <div class="result-display">
+        <div class="resultScreen1">
+          <picture>
+            <img src="./assets/images/illustration-empty.svg" alt="illustration-empty">
+          </picture>
+          <div class="result-title1">
+            <h2>Results shown here</h2>
+            <p> Complete the form and click “calculate repayments” to see what
+              your monthly repayments would be.</p>
+          </div>
+        </div>
+        <div class="resultScreen2">
+          <div class="result-title1">
+            <h2>Your results</h2>
+            <p> Your results are shown below based on the information you provided.
+              To adjust the results, edit the form and click “calculate repayments” again.</p>
+          </div>
+          <div class="output-result">
+            <p>Your monthly repayments</p>
+            <h1 class="monthly-repayments">&pound;</h1>
+            <p style="padding-top: 1.5rem;"> Total you'll repay over the term</p>
+            <h2 class="Total-repay">&pound;</h2>
+          </div>
+        </div>
+      </div>
+    </main>
+
+  </div>
+  <script>
+    const contact_form = document.getElementById('contact-form');
+    const clearAll = document.querySelector('.clearBtn');
+    const mortageAmount = document.getElementById('mortage');
+    const mortageAmount_row = document.querySelector('.mortage-amount');
+    const mortageTerm_row = document.querySelector('.mortage-Term');
+    const interestRate_row = document.querySelector('.Interest-amount');
+    const mortageTerm = document.getElementById('mortageTerm');
+    const interestRate = document.getElementById('InterestAmount');
+
+    let radioBtn_parent = document.querySelector('.radio');
+    var validateAmount = false;
+    var validateTerm = false;
+    var validateRate = false;
+    var validateRadio = false;
+    let mortageParent = (mortageAmount.parentElement).parentElement;
+    let mortageTerm_Parent = (mortageTerm.parentElement).parentElement;
+    let interestRate_Parent = (interestRate.parentElement).parentElement;
+    var errorMsg = `<span class="errorMsg">This field is required</span>`;
+
+
+    contact_form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      if (validateAmount && validateTerm && validateRate && validateRadio) {
+        let selectedRadio = document.querySelector('input[name="mortage-Type"]:checked');
+
+        const principal = parseFloat(mortageAmount.value.replace(/[^0-9.]/g, ''));
+        const term = parseInt(mortageTerm.value);
+        const interest = parseFloat(interestRate.value.replace(/[^0-9.]/g, '')) / 100;
+        const monthlyInterestRate = interest / 12;
+        const numberOfPayments = term * 12;
+        if (selectedRadio.id == "Interest") {
+          if (!isNaN(principal) && !isNaN(term) && !isNaN(interest)) {
+
+            const interesMortage = principal * monthlyInterestRate;
+            const totalInterst_mortage = (interesMortage * numberOfPayments) + principal;
+            // Update the result display
+            document.querySelector('.monthly-repayments').innerText = `£${interesMortage.toFixed(2)}`;
+            document.querySelector('.Total-repay').innerText = `£${totalInterst_mortage.toFixed(2)}`;
+            // Show the results
+            document.querySelector('.resultScreen1').style.display = 'none';
+            document.querySelector('.resultScreen2').classList.add("screenDisplay");
+          }
+        }
+        if (selectedRadio.id == "Repayment") {
+          // Check if inputs are valid
+          if (!isNaN(principal) && !isNaN(term) && !isNaN(interest)) {
+            // Calculate monthly interest rate
+
+
+            // Calculate monthly repayment
+            const monthlyRepayment = (principal * monthlyInterestRate * Math.pow(1 + monthlyInterestRate, numberOfPayments)) /
+              (Math.pow(1 + monthlyInterestRate, numberOfPayments) - 1);
+            const totalRepayment = monthlyRepayment * numberOfPayments;
+
+            // Update the result display
+            document.querySelector('.monthly-repayments').innerText = `£${monthlyRepayment.toFixed(2)}`;
+            document.querySelector('.Total-repay').innerText = `£${totalRepayment.toFixed(2)}`;
+
+            // Show the results
+            document.querySelector('.resultScreen1').style.display = 'none';
+            document.querySelector('.resultScreen2').classList.add("screenDisplay");
+          } else {
+            alert('Please enter valid numbers for all fields.');
+          }
+        }
+
+      }
+    });
+
+    clearAll.addEventListener('click', function () {
+      contact_form.reset();
+      setTimeout(() => location.reload(), 0);
+    });
+    // Mortage amount field
+    mortageAmount.addEventListener('input', function () {
+      if (mortageAmount.value) {
+        validateAmount = true;
+        let errorMsgs = mortageParent.querySelector('.errorMsg');
+        if (errorMsgs) {
+          errorMsgs.remove();
+        }
+
+        mortageAmount_row.classList.remove('errorBorder');
+        document.querySelector('.mortage-amount span').classList.remove("errorSpan");
+        // Remove any non-numeric characters before converting to a number
+        let amount = parseFloat(mortageAmount.value.replace(/[^0-9.]/g, ''));
+
+        // Check if the input is a valid number
+        if (!isNaN(amount)) {
+          // Format the amount as GBP currency
+          mortageAmount.value = amount.toLocaleString({ style: 'currency', currency: 'GBP' });
+        }
+      }
+    });
+
+    // mortage term  field
+
+    mortageTerm.addEventListener('input', function () {
+      if (mortageTerm.value) {
+        validateTerm = true;
+        let errorMsgs = mortageTerm_Parent.querySelector('.errorMsg');
+        if (errorMsgs) {
+          errorMsgs.remove();
+        }
+        mortageTerm_row.classList.remove('errorBorder');
+        document.querySelector('.mortage-Term span').classList.remove("errorSpan");
+        // Remove any non-numeric characters before converting to a number
+        let amount = parseFloat(mortageTerm.value.replace(/[^0-9.]/g, ''));
+
+        // Check if the input is a valid number
+        if (!isNaN(amount)) {
+          // Format the amount as GBP currency
+          mortageTerm.value = amount.toLocaleString({ style: 'currency', currency: 'GBP' });
+        }
+      }
+    });
+
+    //  interest rate field
+
+    interestRate.addEventListener('input', function () {
+      if (interestRate.value) {
+        validateRate = true;
+        let errorMsgs = interestRate_Parent.querySelector('.errorMsg');
+        if (errorMsgs) {
+          errorMsgs.remove();
+        }
+        interestRate_row.classList.remove('errorBorder');
+        document.querySelector('.Interest-amount span').classList.remove("errorSpan");
+        // Remove any non-numeric characters before converting to a number
+        let amount = parseFloat(interestRate.value.replace(/[^0-9.]/g, ''));
+
+        // Check if the input is a valid number
+        if (!isNaN(amount)) {
+          // Format the amount as GBP currency
+          interestRate.value = amount.toLocaleString({ style: 'currency', currency: 'GBP' });
+        }
+      }
+    });
+
+    // Add event listener for radio buttons to remove error message on selection
+    document.querySelectorAll('input[name="mortage-Type"]').forEach((radio) => {
+      radio.addEventListener('change', function () {
+        let selectedRadio = document.querySelector('input[name="mortage-Type"]:checked');
+        let errorMsgs = radioBtn_parent.querySelector('.errorMsg');
+
+        if (selectedRadio) {
+          if (errorMsgs) {
+            errorMsgs.remove();
+          }
+        }
+        validateRadio = true;
+      });
+    });
+    function validate() {
+      let selectedRadio = document.querySelector('input[name="mortage-Type"]:checked');
+      if (!selectedRadio) {
+        if (!radioBtn_parent.querySelector('.errorMsg')) {
+          radioBtn_parent.insertAdjacentHTML('beforeend', errorMsg); // Append the error message if it doesn't exist
+        } // Show error if no radio button is selected
+        validateRadio = false;
+      }
+      else {
+        let errorMsgs = radioBtn_parent.querySelector('.errorMsg');
+
+        if (errorMsgs) {
+          errorMsgs.remove();
+        } // Hide error if a radio button is selected
+        validateRadio = true;
+      }
+
+      if (!validateAmount) {
+
+        mortageAmount_row.classList.add('errorBorder');
+        document.querySelector('.mortage-amount span').classList.add("errorSpan");
+        if (!mortageParent.querySelector('.errorMsg')) {
+          mortageParent.insertAdjacentHTML('beforeend', errorMsg); // Append the error message if it doesn't exist
+        }
+
+      }
+      if (!validateTerm) {
+
+        mortageTerm_row.classList.add('errorBorder');
+        document.querySelector('.mortage-Term span').classList.add("errorSpan");
+        if (!mortageTerm_Parent.querySelector('.errorMsg')) {
+          mortageTerm_Parent.insertAdjacentHTML('beforeend', errorMsg);
+        }
+
+
+      }
+      if (!validateRate) {
+
+        interestRate_row.classList.add('errorBorder');
+        document.querySelector('.Interest-amount span').classList.add("errorSpan");
+        if (!interestRate_Parent.querySelector('.errorMsg')) {
+          interestRate_Parent.insertAdjacentHTML('beforeend', errorMsg);
+        }
+
+
+      }
+
+    }
+
+
+  </script>
+</body>
+
+</html>

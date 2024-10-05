@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+   .custom-radio input[type='radio'] {
+  appearance: none;
+  width: 15px;
+  height: 15px;
+  border: 1px solid hsl(200, 26%, 54%);
+  border-radius: 50%;
+  outline: none;
+  box-shadow: 0 0 5px #999;
+  transition: box-shadow 0.3s ease;
+}
+
+.custom-radio input[type='radio']:before {
+  content: '';
+  display: block;
+  width: 60%;
+  height: 60%;
+  margin: 0.174rem auto;
+  border-radius: 50%;
+}
+.custom-radio input[type='radio']:checked{
+  background-color: hsl(61deg 70% 52% / 14%);;
+  border-color: hsl(61, 70%, 52%);
+}
+.custom-radio input[type='radio']:checked:before {
+  background: hsl(61, 70%, 52%);
+}
+      </style>
+</head>
+<body>
+    
+<form>
+  <label class="custom-radio">
+    <input type="radio" name="option" value="option1">
+    Option 1
+  </label>
+  <label class="custom-radio">
+    <input type="radio" name="option" value="option2">
+    Option 2
+  </label>
+</form>
+
+      
+</body>
+</html>
