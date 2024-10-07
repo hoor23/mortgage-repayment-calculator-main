@@ -123,6 +123,18 @@ height: auto;
   border: 1px solid hsl(61deg 88.9% 57.45%);
   background: hsl(61deg 88.9% 57.45% / 8%);
 }
+/* .radioSelect{
+  border: 1px solid hsl(61deg 88.9% 57.45%);
+  background: hsl(61deg 88.9% 57.45% / 8%);
+}
+.custom-radio input[type='radio']:checked {
+  border: 1px solid hsl(61deg 88.9% 57.45%);
+  background: hsl(61deg 88.9% 57.45% / 8%);
+} */
+.mortage-Type.active {
+  border: 1px solid hsl(61deg 88.9% 57.45%);
+  background: hsl(61deg 88.9% 57.45% / 8%);
+}
 .fldset .mortage-amount:hover,
 .mortage-Term:hover,
 .Interest-amount:hover {

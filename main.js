@@ -142,7 +142,13 @@ document.querySelectorAll('input[name="mortage-Type"]').forEach((radio) => {
   radio.addEventListener('change', function () {
     let selectedRadio = document.querySelector('input[name="mortage-Type"]:checked');
     let errorMsgs = radioBtn_parent.querySelector('.errorMsg');
+  // Remove 'active' class from all .mortage-Type divs
+  document.querySelectorAll('.mortage-Type').forEach((div) => {
+    div.classList.remove('active');
+  });
 
+  // Add 'active' class to the current radio button's parent div
+  this.closest('.mortage-Type').classList.add('active');
     if (selectedRadio) {
       if (errorMsgs) {
         errorMsgs.remove();
