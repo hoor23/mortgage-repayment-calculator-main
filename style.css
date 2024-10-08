@@ -47,7 +47,9 @@ height: auto;
   color: hsl(202, 55%, 16%);
   font-size: 15px;
 }
-
+.title h1{
+  font-size: 22px;
+}
 .clearBtn {
   text-decoration: underline;
   color: hsl(200, 24%, 40%);
@@ -123,14 +125,7 @@ height: auto;
   border: 1px solid hsl(61deg 88.9% 57.45%);
   background: hsl(61deg 88.9% 57.45% / 8%);
 }
-/* .radioSelect{
-  border: 1px solid hsl(61deg 88.9% 57.45%);
-  background: hsl(61deg 88.9% 57.45% / 8%);
-}
-.custom-radio input[type='radio']:checked {
-  border: 1px solid hsl(61deg 88.9% 57.45%);
-  background: hsl(61deg 88.9% 57.45% / 8%);
-} */
+
 .mortage-Type.active {
   border: 1px solid hsl(61deg 88.9% 57.45%);
   background: hsl(61deg 88.9% 57.45% / 8%);
@@ -377,14 +372,15 @@ background: hsl(61, 70%, 52%);
     flex-direction: row;
   }
   .calculator-display {
-    max-width: 412px;
+    max-width: 430px;
+    padding: 4rem 2rem;
   }
   .calc-btn {
 width: 262px;
 }
 .result-display
 {
-max-width: 412px;
+max-width: 430px;
 border-radius: 0px 18px 18px 53px;
 }
 .container{
