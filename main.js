@@ -40,6 +40,7 @@ contact_form.addEventListener('submit', function (e) {
          document.querySelector('.resultScreen1').style.display = 'none';
       document.querySelector('.resultScreen2').classList.add("screenDisplay");
       }
+     
     }
     if (selectedRadio.id == "Repayment") {
  // Check if inputs are valid
@@ -61,9 +62,10 @@ contact_form.addEventListener('submit', function (e) {
       document.querySelector('.resultScreen2').classList.add("screenDisplay");
     } else {
       alert('Please enter valid numbers for all fields.');
+    
     }
     }
-
+    validate();
   }
 });
 
@@ -157,51 +159,55 @@ document.querySelectorAll('input[name="mortage-Type"]').forEach((radio) => {
     validateRadio = true;
   });
 });
+
 function validate() {
-  let selectedRadio = document.querySelector('input[name="mortage-Type"]:checked');
-  if (!selectedRadio) {
-    if (!radioBtn_parent.querySelector('.errorMsg')) {
-      radioBtn_parent.insertAdjacentHTML('beforeend', errorMsg); // Append the error message if it doesn't exist
-    } // Show error if no radio button is selected
-    validateRadio = false;
-  }
-  else {
-    let errorMsgs = radioBtn_parent.querySelector('.errorMsg');
 
-    if (errorMsgs) {
-      errorMsgs.remove();
-    } // Hide error if a radio button is selected
-    validateRadio = true;
-  }
+  // Remove existing error messages
+  document.querySelectorAll('.errorMsg').forEach((errorMsg) => errorMsg.remove());
+  document.querySelectorAll('.errorBorder').forEach((element) => element.classList.remove('errorBorder'));
+  document.querySelectorAll('.errorSpan').forEach((element) => element.classList.remove('errorSpan'));
 
-  if (!validateAmount) {
-
+  // Validate mortgage amount
+  if (!mortageAmount.value) {
     mortageAmount_row.classList.add('errorBorder');
     document.querySelector('.mortage-amount span').classList.add("errorSpan");
     if (!mortageParent.querySelector('.errorMsg')) {
-      mortageParent.insertAdjacentHTML('beforeend', errorMsg); // Append the error message if it doesn't exist
+      mortageParent.insertAdjacentHTML('beforeend', errorMsg);
     }
-
+  } else {
+    validateAmount = true;
   }
-  if (!validateTerm) {
 
+  // Validate mortgage term
+  if (!mortageTerm.value) {
     mortageTerm_row.classList.add('errorBorder');
     document.querySelector('.mortage-Term span').classList.add("errorSpan");
     if (!mortageTerm_Parent.querySelector('.errorMsg')) {
       mortageTerm_Parent.insertAdjacentHTML('beforeend', errorMsg);
     }
-
-
+  } else {
+    validateTerm = true;
   }
-  if (!validateRate) {
 
+  // Validate interest rate
+  if (!interestRate.value) {
     interestRate_row.classList.add('errorBorder');
     document.querySelector('.Interest-amount span').classList.add("errorSpan");
     if (!interestRate_Parent.querySelector('.errorMsg')) {
       interestRate_Parent.insertAdjacentHTML('beforeend', errorMsg);
     }
-
-
+  } else {
+    validateRate = true;
   }
 
+  // Validate radio buttons
+  let selectedRadio = document.querySelector('input[name="mortage-Type"]:checked');
+  if (!selectedRadio) {
+    if (!radioBtn_parent.querySelector('.errorMsg')) {
+      radioBtn_parent.insertAdjacentHTML('beforeend', errorMsg);
+    }
+    validateRadio = false;
+  } else {
+    validateRadio = true;
+  }
 }
